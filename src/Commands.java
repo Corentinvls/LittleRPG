@@ -21,6 +21,9 @@ public class Commands
                 return true;
             case "exit":
                 return false;
+            case "create":
+                main.game = new Game();
+                return true;
             default:
                 printn("Command Error");
                 printn("");
@@ -47,7 +50,7 @@ public class Commands
      * Display an Object with back to line
      * @param o The object that you want to write
      */
-    private static void printn(Object o)
+    public static void printn(Object o)
     {
         System.out.println(o);
     }
@@ -56,7 +59,7 @@ public class Commands
      * Display an Object without back to line
      * @param o The object that you want to write
      */
-    private static void print(Object o)
+    public static void print(Object o)
     {
         System.out.print(o);
     }

@@ -1,8 +1,11 @@
-public class DefaultArchetype {
+import java.util.Random;
+
+public class DefaultArchetype
+{
         private String name;
         private int attack;
-        private  int life;
-        private  int initiative;
+        private int life;
+        private int initiative;
 
         /**
          * Archetype constructor.
@@ -11,8 +14,8 @@ public class DefaultArchetype {
          * @see #life   int life  of the archetype
          * @see #initiative int initiative of the archetype
          */
-
-        public DefaultArchetype (){
+        public DefaultArchetype ()
+        {
             name= "unknow";
             attack = 10;
             life = 100;
@@ -26,6 +29,7 @@ public class DefaultArchetype {
         public String getName () {
             return name;
         }
+
         /**
          * Method getAttack.
          * @return int Attack of the archetype
@@ -33,6 +37,7 @@ public class DefaultArchetype {
         public int getAttack () {
             return attack;
         }
+
         /**
          * Method getLife.
          * @return int life of the archetype
@@ -40,6 +45,7 @@ public class DefaultArchetype {
         public int getLife () {
             return life;
         }
+
         /**
          * Method getInitiative.
          * @return int initiative of the archetype
@@ -47,28 +53,32 @@ public class DefaultArchetype {
         public int getInitiative () {
             return initiative;
         }
+
         /**
          * Method getDamageSend.
          * @return int Damage send of the archetype
          */
-        public int getDamageSend(){
-            int damage= (int) Math.round(Math.random()*(10-0) * attack);
-            return damage;
+        public int getDamageSend()
+        {
+            return new Random().nextInt(10) * attack;
         }
+
         /**
          * Method setDamageReceived.
          * @param damageReceived quantity of damage received
          * update life after receiving damage
          */
-        public void setDamageReceived(int damageReceived){
-            life = life - damageReceived;
+        public void setDamageReceived(int damageReceived)
+        {
+            life -= damageReceived;
         }
         /**
          * Method toString.
          * @return String all archetype's attributes
          */
-        public String toString() {
-            return name + " had " + life + " HP, " + attack + " strenght and " + initiative + " initiative";
+        public String toString()
+        {
+            return name + " had " + life + " HP, " + attack + " strength and " + initiative + " initiative";
         }
     }
 
