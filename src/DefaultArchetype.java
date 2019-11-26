@@ -19,7 +19,7 @@ public class DefaultArchetype
             archetypeName = "unknow";
             attack = 10;
             life = 100;
-            initiative = 100;
+            initiative = new Random().nextInt(100);
         }
 
         /**
@@ -68,9 +68,9 @@ public class DefaultArchetype
          * @param damageReceived quantity of damage received
          * update life after receiving damage
          */
-        public void setDamageReceived(int damageReceived)
+        public int setDamageReceived(int damageReceived)
         {
-            life -= damageReceived;
+            return damageReceived;
         }
         /**
          * Method toString.

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Game
 {
@@ -30,5 +31,58 @@ public class Game
         Commands.printn("");
         Commands.printn("**********************");
 
+    }
+    public void fight()
+    {
+        Character playerTwo = null;
+
+        Commands.printn("You're going to initiate a fight between two fighters.");
+        listCharacters();
+        Commands.printn("Choose your first fighter id.");
+        Commands.print("> ");
+        Scanner choiceFighter = new Scanner(System.in);
+        Character playerOne = new Character(characters.get(choiceFighter.nextInt()-1));
+
+        do
+        {
+            if(playerTwo == playerOne)
+            {
+                Commands.printn("Character already selected.");
+            }
+            Commands.printn("Choose your second fighter id.");
+            Commands.print("> ");
+            playerTwo = new Character(characters.get(choiceFighter.nextInt() - 1));
+
+        } while (playerTwo == playerOne);
+
+        if(playerTwo.initative>playerOne.initative)
+        {
+           var tempToChange=playerOne;
+           playerOne=playerTwo;
+           playerTwo=tempToChange;
+        }
+
+        Commands.printn("The fight between "+ playerOne.name + " and "+ playerTwo.name + " begin !");
+        Commands.printn(playerOne.name + "has the initiative");
+
+        int round = 1;
+        while (playerOne.isAlive() && playerTwo.isAlive())
+        {
+            Commands.printn("Round : " + round);
+
+
+            playerOne.attack(playerTwo);
+
+           if (playerTwo.isAlive())
+           {
+               playerTwo.attack(playerOne);
+           }
+            round++;
+        }
+        if (playerOne.isAlive())
+            Commands.printn( playerOne.archetype.getArchetypeName() + ": " +playerOne.name + "is the best Winner in the street !");
+        else
+            Commands.printn( playerTwo.archetype.getArchetypeName() + ": " +playerTwo.name + "is the best Winner in the street !");
+        Commands.printn("");
     }
 }
