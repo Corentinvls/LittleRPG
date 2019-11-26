@@ -22,7 +22,6 @@ public class Game
     {
         Commands.printn("List of characters :");
         Commands.printn("");
-        //characters.forEach(Commands::printn);
         for(int i = 0; i < characters.size(); i++)
         {
             Commands.printn((i + 1) + " - " + characters.get(i));
@@ -30,8 +29,8 @@ public class Game
 
         Commands.printn("");
         Commands.printn("**********************");
-
     }
+
     public void fight()
     {
         Character playerTwo = null;
@@ -45,15 +44,12 @@ public class Game
 
         do
         {
-            if(playerTwo == playerOne)
-            {
+            if(playerTwo != null && playerOne.name.equals(playerTwo.name))
                 Commands.printn("Character already selected.");
-            }
             Commands.printn("Choose your second fighter id.");
             Commands.print("> ");
             playerTwo = new Character(characters.get(choiceFighter.nextInt() - 1));
-
-        } while (playerTwo == playerOne);
+        } while (playerOne.name.equals(playerTwo.name));
 
         if(playerTwo.initative>playerOne.initative)
         {
@@ -62,21 +58,17 @@ public class Game
            playerTwo=tempToChange;
         }
 
-        Commands.printn("The fight between "+ playerOne.name + " and "+ playerTwo.name + " begin !");
-        Commands.printn(playerOne.name + "has the initiative");
+        Commands.printn("The fight between "+ playerOne.name + " and "+ playerTwo.name + " begin !\n");
+        Commands.printn(playerOne.name + " has the initiative.");
 
         int round = 1;
         while (playerOne.isAlive() && playerTwo.isAlive())
         {
+            Commands.printn("");
             Commands.printn("Round : " + round);
-
-
             playerOne.attack(playerTwo);
-
-           if (playerTwo.isAlive())
-           {
+            if (playerTwo.isAlive())
                playerTwo.attack(playerOne);
-           }
             round++;
         }
         if (playerOne.isAlive())
