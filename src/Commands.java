@@ -59,7 +59,15 @@ public class Commands
                 }while(index != 0);
                 return true;
             case "fight":
-                main.game.fight();
+                if(main.game == null)
+                    printn("You must to create a new game with command 'play' !");
+                else
+                {
+                    if(main.game.characters.size() < 2)
+                        printn("You need at least two characters !");
+                    else
+                        main.game.fight();
+                }
                 return true;
             default:
                 printn("Command Error");
@@ -80,7 +88,7 @@ public class Commands
         printn("play        - To create a new game");
         printn("create      - To create a character");
         printn("characters  - To show all existing characters");
-        printn("fight       - To show all existing characters");
+        printn("fight       - To start a fight");
         printn("info        - To show character information");
         printn("exit        - To quit the application");
         printn("");
