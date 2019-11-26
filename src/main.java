@@ -3,12 +3,12 @@ public class main
     /**
      * Main function
      */
+    public static Game game;
     public static void main(String[] args)
     {
         starting();
         while (Commands.read())
-        {
-        }
+        { }
         quit();
     }
 
@@ -17,13 +17,13 @@ public class main
      */
     private static void starting()
     {
-        print("Application has started");
-        print("####################################################");
-        print("");
-        print("Welcome to .... RoleAdventure");
-        print("");
-        print("####################################################");
-        print("");
+        Commands.printn("Application has started");
+        Commands.printn("####################################################");
+        Commands.printn("");
+        Commands.printn("Welcome to .... RoleAdventure");
+        Commands.printn("");
+        Commands.printn("####################################################");
+        Commands.printn("");
     }
 
     /**
@@ -31,20 +31,11 @@ public class main
      */
     private static void quit()
     {
-        print("####################################################");
-        print("");
-        print("Good Bye");
-        print("");
-        print("####################################################");
-        print("");
-    }
-
-    /**
-     * Display an Object with back to line
-     * @param o The object that you want to write
-     */
-    private static void print(Object o)
-    {
-        System.out.println(o);
+        Commands.printn("####################################################");
+        Commands.printn("");
+        Commands.printn("Good Bye");
+        Commands.printn("");
+        Commands.printn("####################################################");
+        Commands.printn("");
     }
 }
