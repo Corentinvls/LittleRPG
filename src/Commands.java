@@ -44,6 +44,7 @@ public class Commands
                 return true;
             case "info":
                 int index;
+                main.game.listCharacters();
                 do
                 {
                     printn("Enter '0' to quit the information.");
@@ -56,6 +57,9 @@ public class Commands
                     else if (index != 0)
                         printn(main.game.characters.get(index - 1).info());
                 }while(index != 0);
+                return true;
+            case "fight":
+                main.game.fight();
                 return true;
             default:
                 printn("Command Error");
