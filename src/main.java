@@ -23,6 +23,7 @@ public class main
         Commands.print("####################################################");
         Commands.print("");
         Commands.print("Welcome to .... RoleAdventure");
+        Commands.printn("Brian je te baise");
         Commands.print("");
         Commands.print("####################################################");
         Commands.print("");

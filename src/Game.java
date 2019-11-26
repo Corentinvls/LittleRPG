@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game
 {
-    Character[] charcaters = new Character[2];
+    List<Character> characters = new ArrayList<Character>();
 
     public Game()
     {
-        charcaters[0] = new Character();
-        charcaters[1] = new Character();
+        characters.add(new Character());
     }
 }
