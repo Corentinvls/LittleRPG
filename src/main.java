@@ -7,10 +7,8 @@ public class main
     public static void main(String[] args)
     {
         starting();
-
         while (Commands.read())
-        {
-        }
+        { }
         quit();
     }
 
@@ -19,14 +17,13 @@ public class main
      */
     private static void starting()
     {
-        Commands.print("Application has started");
-        Commands.print("####################################################");
-        Commands.print("");
-        Commands.print("Welcome to .... RoleAdventure");
-        Commands.printn("Brian je te baise");
-        Commands.print("");
-        Commands.print("####################################################");
-        Commands.print("");
+        Commands.printn("Application has started");
+        Commands.printn("####################################################");
+        Commands.printn("");
+        Commands.printn("Welcome to .... RoleAdventure");
+        Commands.printn("");
+        Commands.printn("####################################################");
+        Commands.printn("");
     }
 
     /**
@@ -34,11 +31,11 @@ public class main
      */
     private static void quit()
     {
-        Commands.print("####################################################");
-        Commands.print("");
-        Commands.print("Good Bye");
-        Commands.print("");
-        Commands.print("####################################################");
-        Commands.print("");
+        Commands.printn("####################################################");
+        Commands.printn("");
+        Commands.printn("Good Bye");
+        Commands.printn("");
+        Commands.printn("####################################################");
+        Commands.printn("");
     }
 }

@@ -2,21 +2,21 @@ import java.util.Random;
 
 public class DefaultArchetype
 {
-        private String name;
+        private String archetypeName;
         private int attack;
         private int life;
         private int initiative;
 
         /**
          * Archetype constructor.
-         * @see #name   string name of the archetype
+         * @see #archetypeName   string name of the archetype
          * @see #attack int attack of the archetype
          * @see #life   int life  of the archetype
          * @see #initiative int initiative of the archetype
          */
         public DefaultArchetype ()
         {
-            name= "unknow";
+            archetypeName = "unknow";
             attack = 10;
             life = 100;
             initiative = 100;
@@ -26,8 +26,8 @@ public class DefaultArchetype
          * Method getName.
          * @return String name of the archetype
          */
-        public String getName () {
-            return name;
+        public String getArchetypeName() {
+            return archetypeName;
         }
 
         /**
@@ -78,7 +78,7 @@ public class DefaultArchetype
          */
         public String toString()
         {
-            return name + " had " + life + " HP, " + attack + " strength and " + initiative + " initiative";
+            return "Archetype : " + archetypeName + " had " + life + " HP, " + attack + " strength and " + initiative + " initiative";
         }
     }
 

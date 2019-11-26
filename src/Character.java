@@ -21,8 +21,8 @@ public class Character
             Commands.print("");
             Commands.print("> Enter your name : ");
             name = sc.nextLine();
-            Commands.printn("Valid the name '" + name + "? Yes / No");
-        } while(sc.nextLine().toLowerCase() != "yes");
+            Commands.printn("Valid the name '" + name + "' ? Yes / No");
+        } while(!sc.nextLine().toLowerCase().equals("yes"));
     }
 
     /**
@@ -31,5 +31,16 @@ public class Character
     public Boolean IsAlive()
     {
         return life > 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
+
+    public String info()
+    {
+        return name + " " + archetype.toString();
     }
 }

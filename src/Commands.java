@@ -21,8 +21,41 @@ public class Commands
                 return true;
             case "exit":
                 return false;
-            case "create":
+            case "play":
                 main.game = new Game();
+                printn("New game created !");
+                return true;
+            case "create":
+                if(main.game == null)
+                    printn("You must to create a new game with command 'play' !");
+                else
+                    main.game.create();
+                return true;
+            case "characters":
+                if(main.game == null)
+                    printn("You must to create a new game with command 'play' !");
+                else
+                {
+                    if(main.game.characters.size() == 0)
+                        printn("No characters found ! Use 'create' to create a character.");
+                    else
+                        main.game.listCharacters();
+                }
+                return true;
+            case "info":
+                int index;
+                do
+                {
+                    printn("Enter '0' to quit the information.");
+                    printn("");
+                    printn("Enter character index :");
+                    print("> ");
+                    index = sc.nextInt();
+                    if(index > main.game.characters.size() || index < 0)
+                        printn("Character not found !");
+                    else if (index != 0)
+                        printn(main.game.characters.get(index - 1).info());
+                }while(index != 0);
                 return true;
             default:
                 printn("Command Error");
@@ -39,8 +72,11 @@ public class Commands
     {
         printn("Commands list :");
         printn("");
-        printn("help");
-        printn("exit");
+        printn("help        - To get all the commands");
+        printn("play        - To create a new game");
+        printn("create      - To create a character");
+        printn("characters  - To show all existing characters");
+        printn("info        - To show character information");
         printn("");
         printn("************");
         printn("");
