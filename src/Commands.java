@@ -76,7 +76,9 @@ public class Commands
         printn("play        - To create a new game");
         printn("create      - To create a character");
         printn("characters  - To show all existing characters");
+        printn("fight       - To show all existing characters");
         printn("info        - To show character information");
+        printn("exit        - To quit the application");
         printn("");
         printn("************");
         printn("");
