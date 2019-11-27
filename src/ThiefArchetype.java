@@ -18,14 +18,14 @@ public class ThiefArchetype extends DefaultArchetype
     @Override
     public int attack()
     {
-        int damage = 0;
+        int damage = this.getDamage();
         if(this.canCritical)
         {
             if(new Random().nextInt(100) < this.criticalChance)
             {
-                damage *= this.getDamage() * 2;
+                damage *=  2;
                 this.canCritical = false;
-                Commands.printn(this.getName() + " made a critical hit : " + damage);
+                Commands.printn(this.getName() + " made a critical hit !");
             }
         }
         else
@@ -38,8 +38,16 @@ public class ThiefArchetype extends DefaultArchetype
     {
         if(new Random().nextInt(100) < this.evadeChance)
         {
-            Commands.printn(this.getName() + " dodge the attack: " + damageReceived + " damage received.");
+            damageReceived = 0;
+            Commands.printn(this.getName() + " dodge the attack : 0 damage received.");
         }
+        this.setLife(this.getLife() - damageReceived);
     }
 
+    @Override
+    public void reset()
+    {
+        this.setLife(100);
+        this.canCritical = true;
+    }
 }

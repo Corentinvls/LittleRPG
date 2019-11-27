@@ -125,7 +125,8 @@ public class Game
         Commands.printn("");
         for(int i = 0; i < characters.size(); i++)
         {
-            Commands.printn((i + 1) + " - " + characters.get(i));
+            Commands.printn((i + 1) + " - " + characters.get(i).getName() +
+                    " (" + characters.get(i).getArchetypeName() + ")");
         }
 
         Commands.printn("");
@@ -155,8 +156,8 @@ public class Game
         if(playerTwo.getInitiative() > playerOne.getInitiative())
         {
            var tempToChange=playerOne;
-           playerOne=playerTwo;
-           playerTwo=tempToChange;
+           playerOne = playerTwo;
+           playerTwo = tempToChange;
         }
 
         Commands.printn("The fight between "+ playerOne.getName() + " and "+ playerTwo.getName() + " begin !\n");
@@ -173,20 +174,22 @@ public class Game
             round++;
         }
         if (isAlive(playerOne))
-            Commands.printn( playerOne.getArchetypeName() + " : " +playerOne.getName() + " is the best Winner in the street !");
+            Commands.printn( playerOne.getArchetypeName() + " : " + playerOne.getName() + " is the best Winner in the street !");
         else
-            Commands.printn( playerTwo.getArchetypeName() + " : " +playerTwo.getName() + " is the best Winner in the street !");
+            Commands.printn( playerTwo.getArchetypeName() + " : " + playerTwo.getName() + " is the best Winner in the street !");
         Commands.printn("");
+        playerOne.reset();
+        playerTwo.reset();
     }
 
     private void attackFight(DefaultArchetype striker, DefaultArchetype target)
     {
-        int damageSend = striker.attack();
 
         Commands.printn("Name         : " + striker.getName());
         Commands.printn("Archetype    : " + striker.getArchetypeName());
         Commands.printn("Health point : " + striker.getLife());
-        Commands.printn("Power Attack : " + striker.attack());
+        Commands.printn("Power Attack : " + striker.getDamage());
+        int damageSend = striker.attack();
         Commands.printn("Damage       : " + damageSend);
         Commands.printn("");
         target.setDamageReceived(damageSend);
@@ -204,4 +207,31 @@ public class Game
         return player.getLife() > 0;
     }
 
+    public void remove()
+    {
+        String valid = "null";
+        Scanner selectRemove = new Scanner(System.in);
+        main.game.listCharacters();
+        int indexRemove;
+        do
+        {
+            Commands.printn("");
+            Commands.print("> Enter character index : ");
+            indexRemove = selectRemove.nextInt();
+            selectRemove.nextLine();
+            if(indexRemove < 1 || indexRemove > characters.size())
+            {
+                Commands.printn("Character not found !");
+                continue;
+            }
+            do
+            {
+                Commands.printn("Valid remove '"  + characters.get(indexRemove - 1).getName() + "' ? Yes / No");
+                Commands.print("> ");
+                valid = selectRemove.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        characters.remove(indexRemove - 1);
+        Commands.printn("**********************");
+    }
 }

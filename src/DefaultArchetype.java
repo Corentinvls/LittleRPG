@@ -24,13 +24,9 @@ public class DefaultArchetype
         this.initiative = new Random().nextInt(100);
     }
 
-    public DefaultArchetype(DefaultArchetype archetype)
+    public void reset()
     {
-        this.archetypeName = archetype.archetypeName;
-        this.life = archetype.life;
-        this.damage = archetype.damage;
-        this.initiative = archetype.initiative;
-        this.characterName = archetype.characterName;
+        this.life = 100;
     }
 
     /**
@@ -95,17 +91,16 @@ public class DefaultArchetype
      */
     public String toString()
     {
-        return this.characterName + " had " + this.life + " HP, " + this.damage + " strength and " + this.initiative + " initiative";
+        return  this.characterName + "is a " + this.archetypeName + ", had " + this.life + " HP, " + this.damage + " strength and " + this.initiative + " initiative.";
     }
 
     public String getArchetypeName()
     {
         return this.archetypeName;
     }
+
     public void setArchetypeName(String value)
     {
         this.archetypeName = value;
     }
-
-
 }

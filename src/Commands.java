@@ -43,20 +43,27 @@ public class Commands
                 }
                 return true;
             case "info":
-                int index;
-                main.game.listCharacters();
-                do
+                if(main.game == null)
                 {
-                    printn("Enter '0' to quit the information.");
-                    printn("");
-                    printn("Enter character index :");
-                    print("> ");
-                    index = sc.nextInt();
-                    if(index > main.game.characters.size() || index < 0)
-                        printn("Character not found !");
-                    else if (index != 0)
-                        printn(main.game.characters.get(index - 1).toString());
-                }while(index != 0);
+                    Commands.printn("You must to create a new game with command 'play' !");
+                }
+                else
+                {
+                    int index;
+                    main.game.listCharacters();
+                    do
+                    {
+                        printn("Enter '0' to quit the information.");
+                        printn("");
+                        printn("Enter character index :");
+                        print("> ");
+                        index = sc.nextInt();
+                        if(index > main.game.characters.size() || index < 0)
+                            printn("Character not found !");
+                        else if (index != 0)
+                            printn(main.game.characters.get(index - 1));
+                    } while(index != 0);
+                }
                 return true;
             case "fight":
                 if(main.game == null)
@@ -67,6 +74,21 @@ public class Commands
                         printn("You need at least two characters !");
                     else
                         main.game.fight();
+                }
+                return true;
+            case "remove":
+                if(main.game == null)
+                    printn("You must to create a new game with command 'play' !");
+                else
+                {
+                    if(main.game.characters.size() == 0)
+                    {
+                        Commands.printn("Characters list is empty");
+                    }
+                    else
+                    {
+                        main.game.remove();
+                    }
                 }
                 return true;
             default:
@@ -88,11 +110,12 @@ public class Commands
         printn("play        - To create a new game");
         printn("create      - To create a character");
         printn("characters  - To show all existing characters");
-        printn("fight       - To start a fight");
         printn("info        - To show character information");
+        printn("fight       - To start a fight");
+        printn("remove      - To remove a character");
         printn("exit        - To quit the application");
         printn("");
-        printn("************");
+        printn("************************");
         printn("");
     }
 
