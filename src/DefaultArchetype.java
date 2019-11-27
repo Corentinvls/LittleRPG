@@ -2,44 +2,58 @@ import java.util.Random;
 
 public class DefaultArchetype
 {
-    protected String archetypeName;
-    public String characterName;
-    protected int attack;
-    protected int life;
-    protected int initiative;
+    private String characterName;
+    private String archetypeName;
+    private int damage;
+    private int life;
+    private int initiative;
+
 
     /**
      * Archetype constructor.
-     * @see #archetypeName   string name of the archetype
-     * @see #attack int attack of the archetype
+     * @see #damage int attack of the archetype
      * @see #life   int life  of the archetype
      * @see #initiative int initiative of the archetype
      */
-    public DefaultArchetype ()
+    public DefaultArchetype (String name)
     {
-        archetypeName = "Default";
-        characterName = null;
-        attack = 10;
-        life = 100;
-        initiative = new Random().nextInt(100);
+        this.characterName = name;
+        this.archetypeName = "default";
+        this.damage = 10;
+        this.life = 100;
+        this.initiative = new Random().nextInt(100);
+    }
+
+    public DefaultArchetype(DefaultArchetype archetype)
+    {
+        this.archetypeName = archetype.archetypeName;
+        this.life = archetype.life;
+        this.damage = archetype.damage;
+        this.initiative = archetype.initiative;
+        this.characterName = archetype.characterName;
     }
 
     /**
      * Method getName.
      * @return String name of the archetype
      */
-    public String getArchetypeName()
+    public String getName()
     {
-        return archetypeName;
+        return this.characterName;
     }
 
     /**
      * Method getAttack.
      * @return int Attack of the archetype
      */
-    public int getAttack ()
+    public int getDamage()
     {
-        return attack;
+        return this.damage;
+    }
+
+    public int attack ()
+    {
+        return getDamage();
     }
 
     /**
@@ -48,7 +62,12 @@ public class DefaultArchetype
      */
     public int getLife ()
     {
-        return life;
+        return this.life;
+    }
+
+    public void setLife (int value)
+    {
+        this.life = value;
     }
 
     /**
@@ -57,16 +76,7 @@ public class DefaultArchetype
      */
     public int getInitiative ()
     {
-        return initiative;
-    }
-
-    /**
-     * Method getDamageSend.
-     * @return int Damage send of the archetype
-     */
-    public int getDamageSend()
-    {
-        return new Random().nextInt(10) * attack;
+        return this.initiative;
     }
 
     /**
@@ -74,18 +84,28 @@ public class DefaultArchetype
      * @param damageReceived quantity of damage received
      * update life after receiving damage
      */
-    public int setDamageReceived(int damageReceived)
+    public void setDamageReceived(int damageReceived)
     {
-        return damageReceived;
+        this.life -= damageReceived;
     }
+
     /**
      * Method toString.
      * @return String all archetype's attributes
      */
     public String toString()
     {
-        return "Archetype : " + archetypeName + " had " + life + " HP, " + attack + " strength and " + initiative + " initiative";
+        return this.characterName + " had " + this.life + " HP, " + this.damage + " strength and " + this.initiative + " initiative";
     }
+
+    public String getArchetypeName()
+    {
+        return this.archetypeName;
+    }
+    public void setArchetypeName(String value)
+    {
+        this.archetypeName = value;
+    }
+
+
 }
-
-

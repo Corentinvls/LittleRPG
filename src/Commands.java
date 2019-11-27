@@ -55,7 +55,7 @@ public class Commands
                     if(index > main.game.characters.size() || index < 0)
                         printn("Character not found !");
                     else if (index != 0)
-                        printn(main.game.characters.get(index - 1).info());
+                        printn(main.game.characters.get(index - 1).toString());
                 }while(index != 0);
                 return true;
             case "fight":

@@ -2,54 +2,44 @@ import java.util.Random;
 
 public class ThiefArchetype extends DefaultArchetype
 {
-    int critcalChanche;
-    Boolean canCritical;
-    int evadeChance;
-    Boolean canEvade;
+    private int criticalChance;
+    private boolean canCritical;
+    private int evadeChance;
 
-    public ThiefArchetype ()
+    public ThiefArchetype (String name)
     {
-
-        archetypeName = "Thief";
-        critcalChanche = 10;
-        canCritical = true;
-        evadeChance = 20;
-        canEvade = true;
+        super(name) ;
+        this.criticalChance = 10;
+        this.canCritical = true;
+        this.evadeChance = 20;
+        this.setArchetypeName("Thief");
     }
 
     @Override
-    public int getDamageSend()
+    public int attack()
     {
-        int damage;
-        if (this.critcalChanche < new Random().nextInt(100) & canCritical )
+        int damage = 0;
+        if(this.canCritical)
         {
-            damage = attack * 2;
-            Commands.printn(characterName + " give a critical hit : " + damage + " damage.");
-            canCritical = false;
-        } else {
-            damage = attack;
-            Commands.printn(characterName + " give  : " + damage + " damage.");
-            if (!canCritical) {
-                canCritical = true;
+            if(new Random().nextInt(100) < this.criticalChance)
+            {
+                damage *= this.getDamage() * 2;
+                this.canCritical = false;
+                Commands.printn(this.getName() + " made a critical hit : " + damage);
             }
         }
+        else
+            this.canCritical = true;
         return damage;
     }
 
     @Override
-    public int setDamageReceived(int damageReceived)
+    public void setDamageReceived(int damageReceived)
     {
-        if (this.evadeChance < new Random().nextInt(100) & canEvade )
+        if(new Random().nextInt(100) < this.evadeChance)
         {
-            damageReceived = 0;
-            Commands.printn(characterName + " dodge the attack: " + damageReceived + " damage received.");
-            canEvade = false;
-        } else {
-            Commands.printn(characterName + " miss to evade: " + damageReceived + " damage received.");
-            if (!canEvade) {
-                canEvade = true;
-            }
+            Commands.printn(this.getName() + " dodge the attack: " + damageReceived + " damage received.");
         }
-        return damageReceived;
     }
+
 }
