@@ -2,16 +2,34 @@ import java.util.Random;
 
 public class WarriorArchetype extends DefaultArchetype
 {
-
-    public WarriorArchetype ()
+    private float shield;
+    public WarriorArchetype (String name)
     {
-        archetypeName = "Warrior";
+        super(name) ;
+        this.shield = 0.2f;
+        this.setArchetypeName("Warrior");
     }
 
     @Override
-    public int setDamageReceived(int damageReceived)
+    public void setDamageReceived(int damageReceived)
     {
-        Commands.printn(characterName + "'s chibre reduced : " + (int)(damageReceived * 0.2) + " damage.");
-        return (int)(damageReceived * 0.8);
+        Commands.printn(this.getName() + "'s shield reduced : " + shieldUsed(damageReceived) + " damage.");
+        this.setLife(this.getLife() - damageReduced(damageReceived));
+    }
+
+    private int shieldUsed (int damageReceived)
+    {
+        return (int)(damageReceived * this.shield);
+    }
+
+    private int damageReduced (int damageReceived)
+    {
+        return (int)(damageReceived * (1 - this.shield));
+    }
+
+    @Override
+    public void reset()
+    {
+        this.setLife(100);
     }
 }

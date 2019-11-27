@@ -2,19 +2,35 @@ import java.util.Random;
 
 public class WizardArchetype extends DefaultArchetype
 {
-    int magicDamage = 30;
-    public WizardArchetype () { archetypeName = "Wizard"; }
+
+    private int magicDamage;
+    public WizardArchetype (String name)
+    {
+        super(name);
+        this.magicDamage = 50;
+        this.setArchetypeName("Wizard");
+    }
 
     @Override
-    public int getDamageSend()
+    public int attack()
     {
-        int damageSend = new Random().nextInt(10) * attack + this.magicDamage;
-        if(this.magicDamage == 0){
-            Commands.printn(characterName + " 's STICK IS BROKEN!!!! !");
-        } else {
-            Commands.printn(characterName + "'s stick inflict: " + (this.magicDamage) + " magical damage.");
+        int damageSend = this.getDamage() + this.magicDamage;
+        if(this.magicDamage == 0)
+        {
+            Commands.printn(this.getName() + " 's stick is broken !");
+        }
+        else
+        {
+            Commands.printn(this.getName() + "'s stick inflict : " + (this.magicDamage) + " magical damage.");
             this.magicDamage /= 2;
         }
         return  damageSend;
+    }
+
+    @Override
+    public void reset()
+    {
+        this.setLife(100);
+        this.magicDamage = 50;
     }
 }
