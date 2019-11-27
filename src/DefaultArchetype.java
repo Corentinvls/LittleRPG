@@ -1,4 +1,11 @@
-import java.util.Random;
+/**
+ * DefaultArchetype Class
+ * @see #characterName string Name of the archetype's character
+ * @see #archetypeName string Name of the archetype
+ * @see #life   int life  of the archetype
+ * @see #damage int attack of the archetype
+ * @see #initiative int initiative of the archetype
+ */
 
 public class DefaultArchetype
 {
@@ -8,30 +15,22 @@ public class DefaultArchetype
     private int life;
     private int initiative;
 
-
     /**
-     * Archetype constructor.
-     * @see #damage int attack of the archetype
-     * @see #life   int life  of the archetype
-     * @see #initiative int initiative of the archetype
+     * Archetype constructor
+     * @param name string to set the character name
      */
     public DefaultArchetype (String name)
     {
         this.characterName = name;
         this.archetypeName = "default";
+        this.life = 100;
         this.damage = 10;
-        this.life = 100;
-        this.initiative = new Random().nextInt(100);
-    }
-
-    public void reset()
-    {
-        this.life = 100;
+        this.initiative = 50;
     }
 
     /**
-     * Method getName.
-     * @return String name of the archetype
+     * Getter getName
+     * @return string of the character name
      */
     public String getName()
     {
@@ -39,21 +38,25 @@ public class DefaultArchetype
     }
 
     /**
-     * Method getAttack.
-     * @return int Attack of the archetype
+     * Getter getArchetypeName
+     * @return string of the archetype name
      */
-    public int getDamage()
+    public String getArchetypeName()
     {
-        return this.damage;
-    }
-
-    public int attack ()
-    {
-        return getDamage();
+        return this.archetypeName;
     }
 
     /**
-     * Method getLife.
+     * Setter setArchetypeName
+     * @param value string to set the archetype name
+     */
+    public void setArchetypeName(String value)
+    {
+        this.archetypeName = value;
+    }
+
+    /**
+     * Getter getLife
      * @return int life of the archetype
      */
     public int getLife ()
@@ -61,14 +64,27 @@ public class DefaultArchetype
         return this.life;
     }
 
+    /**
+     * Setter setLife
+     * @param value int value to set the archetype life
+     */
     public void setLife (int value)
     {
         this.life = value;
     }
 
     /**
-     * Method getInitiative.
-     * @return int initiative of the archetype
+     * Getter getDamage
+     * @return int of the archetype damage
+     */
+    public int getDamage()
+    {
+        return this.damage;
+    }
+
+    /**
+     * Getter getInitiative
+     * @return int of the archetype initiative
      */
     public int getInitiative ()
     {
@@ -76,9 +92,25 @@ public class DefaultArchetype
     }
 
     /**
-     * Method setDamageReceived.
-     * @param damageReceived quantity of damage received
-     * update life after receiving damage
+     * Method to reset the archetype properties
+     */
+    public void reset()
+    {
+        this.life = 100;
+    }
+
+    /**
+     * Method attack
+     * @return int of archetype attack
+     */
+    public int attack()
+    {
+        return getDamage();
+    }
+
+    /**
+     * Method setDamageReceived to update life after receiving damage
+     * @param damageReceived int quantity of damage received
      */
     public void setDamageReceived(int damageReceived)
     {
@@ -86,21 +118,13 @@ public class DefaultArchetype
     }
 
     /**
-     * Method toString.
-     * @return String all archetype's attributes
+     * Override method toString from Object
+     * @return String with all archetype attributes
      */
+    @Override
     public String toString()
     {
-        return  this.characterName + "is a " + this.archetypeName + ", had " + this.life + " HP, " + this.damage + " strength and " + this.initiative + " initiative.";
-    }
-
-    public String getArchetypeName()
-    {
-        return this.archetypeName;
-    }
-
-    public void setArchetypeName(String value)
-    {
-        this.archetypeName = value;
+        return  this.characterName + "is a " + this.archetypeName + ", had " + this.life + " HP, " +
+                this.damage + " strength and " + this.initiative + " initiative.";
     }
 }
