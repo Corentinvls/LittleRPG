@@ -16,9 +16,9 @@ public class Game
     public Game()
     {
         characters = new ArrayList<DefaultArchetype>();
-        characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
-        characters.add(new ThiefArchetype("toto",150, 400, 200));
-        characters.add(new WarriorArchetype("coco",150, 400, 200));
+        // characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
+        // characters.add(new ThiefArchetype("toto",150, 400, 200));
+        // characters.add(new WarriorArchetype("coco",150, 400, 200));
 
     }
 
