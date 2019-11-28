@@ -42,7 +42,7 @@ public class WarriorArchetype extends DefaultArchetype
 
     /**
      * Method shieldUsed
-     * @param damageReceived
+     * @param damageReceived int quantity of damage received
      * @return int blocked damage
      */
     private int shieldUsed (int damageReceived)
@@ -52,7 +52,7 @@ public class WarriorArchetype extends DefaultArchetype
 
     /**
      * Method damageReduced
-     * @param damageReceived
+     * @param damageReceived int quantity of damage received
      * @return int reduced damage
      */
     private int damageReduced (int damageReceived)

@@ -12,6 +12,7 @@ public class WizardArchetype extends DefaultArchetype
      * @param damage int to set the character damage
      * @param life int to set the character life
      * @param initiative int to set the character initiative
+     * @param magicDamage int to set the character magic damage
      */
     public WizardArchetype (String name,int damage, int life, int initiative,int magicDamage)
     {
