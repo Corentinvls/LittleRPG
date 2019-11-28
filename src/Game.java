@@ -366,7 +366,7 @@ public class Game
      */
     public void remove()
     {
-        String valid = "null";
+        String valid = "";
         Scanner selectRemove = new Scanner(System.in);
         main.game.listCharacters();
         int indexRemove;

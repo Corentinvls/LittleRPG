@@ -10,7 +10,7 @@ public class Commands
      * Method to read command from Menu
      * @return true to continue or false to exit
      */
-    public static Boolean read()
+    public static boolean read()
     {
         Scanner sc = new Scanner(System.in);
         printn("*** Menu ***");
