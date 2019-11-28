@@ -2,25 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Class Game to start the game that contain all create / list / editing methods
- */
 public class Game
 {
     List<DefaultArchetype> characters;
 
-    /**
-     * Game method that contain the ArrayList of each characters created in the game
-     * @see #characters ArrayList of DefaultArchetype
-     */
     public Game()
     {
         characters = new ArrayList<DefaultArchetype>();
     }
 
-    /**
-     * Create method for creating a new character with Archetype and name
-     */
     public void create()
     {
         Commands.printn("Creating a character...");
@@ -41,10 +31,6 @@ public class Game
         Commands.printn("Character '" + characters.get(characters.size() - 1).getName() + "' has been created");
     }
 
-    /**
-     * createName method for create new character player name
-     * @return #name of the new character created
-     */
     private String createName()
     {
         Scanner sc = new Scanner(System.in);
@@ -72,11 +58,6 @@ public class Game
         return name;
     }
 
-    /**
-     * usedName method for check if a name is under use or not
-     * @param name : the name of the character
-     * @return boolean true if name already in use and false if name available
-     */
     private boolean usedName(String name)
     {
         for(DefaultArchetype character : characters)
@@ -90,10 +71,6 @@ public class Game
         return false;
     }
 
-    /**
-     * createArchetype method for generate archetype of each new character
-     * @return #archetype of the new character
-     */
     private String createArchetype()
     {
         Scanner sc = new Scanner(System.in);
@@ -129,10 +106,6 @@ public class Game
         return archetype;
     }
 
-    /**
-     * listArchetype method to list all of the archetypes available for character creation.
-     * @param archetypes available in the list
-     */
     public void listArchetype(List<String> archetypes)
     {
         Commands.printn("List of archetype :");
@@ -146,9 +119,6 @@ public class Game
         Commands.printn("**********************");
     }
 
-    /**
-     * listCharacters method to display all characters already created
-     */
     public void listCharacters()
     {
         Commands.printn("List of characters :");
@@ -163,10 +133,6 @@ public class Game
         Commands.printn("**********************");
     }
 
-    /**
-     * fight method to start a fight between two players
-     * Select two characters in the character list who have to fight
-     */
     public void fight()
     {
         DefaultArchetype playerTwo = null;
@@ -216,11 +182,6 @@ public class Game
         playerTwo.reset();
     }
 
-    /**
-     * attackFight method for display all characters informations at each rounds start
-     * @param striker is the character who become an attack
-     * @param target is the character who receive the attack
-     */
     private void attackFight(DefaultArchetype striker, DefaultArchetype target)
     {
 
@@ -238,20 +199,14 @@ public class Game
             Commands.printn(target.getName() + " is dead !");
     }
 
-
     /**
-     * isAlive method use for check if character is alive or not checking is life
-     * @param player is the player checked
-     * @return true if life > 0 , false if life < 0
-     */
+     * @return life > 0
+     * */
     public boolean isAlive(DefaultArchetype player)
     {
         return player.getLife() > 0;
     }
 
-    /**
-     * remove method to remove a character from the character list with his index number
-     */
     public void remove()
     {
         String valid = "null";
