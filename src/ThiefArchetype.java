@@ -6,9 +6,9 @@ public class ThiefArchetype extends DefaultArchetype
     private boolean canCritical;
     private int evadeChance;
 
-    public ThiefArchetype (String name)
+    public ThiefArchetype (String name, int damage, int life, int initiative)
     {
-        super(name) ;
+        super(name, damage, life, initiative) ;
         this.criticalChance = 10;
         this.canCritical = true;
         this.evadeChance = 20;
@@ -47,7 +47,7 @@ public class ThiefArchetype extends DefaultArchetype
     @Override
     public void reset()
     {
-        this.setLife(100);
+        this.setLife(this.getMaxLife());
         this.canCritical = true;
     }
 }

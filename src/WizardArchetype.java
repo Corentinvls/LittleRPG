@@ -4,10 +4,10 @@ public class WizardArchetype extends DefaultArchetype
 {
 
     private int magicDamage;
-    public WizardArchetype (String name)
+    public WizardArchetype (String name,int damage, int life, int initiative,int magicDamage)
     {
-        super(name);
-        this.magicDamage = 50;
+        super(name, damage, life, initiative);
+        this.magicDamage = magicDamage;
         this.setArchetypeName("Wizard");
     }
 
@@ -30,7 +30,7 @@ public class WizardArchetype extends DefaultArchetype
     @Override
     public void reset()
     {
-        this.setLife(100);
+        this.setLife(this.getMaxLife());
         this.magicDamage = 50;
     }
 }

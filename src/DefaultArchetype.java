@@ -6,6 +6,7 @@ public class DefaultArchetype
     private String archetypeName;
     private int damage;
     private int life;
+    private int maxLife;
     private int initiative;
 
 
@@ -15,18 +16,19 @@ public class DefaultArchetype
      * @see #life   int life  of the archetype
      * @see #initiative int initiative of the archetype
      */
-    public DefaultArchetype (String name)
+    public DefaultArchetype (String name, int damage, int life, int initiative)
     {
         this.characterName = name;
         this.archetypeName = "default";
-        this.damage = 10;
-        this.life = 100;
-        this.initiative = new Random().nextInt(100);
+        this.damage = damage;
+        this.life = life;
+        this.maxLife = life;
+        this.initiative = initiative;
     }
 
     public void reset()
     {
-        this.life = 100;
+        //this.life = 100;
     }
 
     /**
@@ -61,6 +63,11 @@ public class DefaultArchetype
         return this.life;
     }
 
+    public int getMaxLife ()
+    {
+        return this.maxLife;
+    }
+
     public void setLife (int value)
     {
         this.life = value;
@@ -91,7 +98,7 @@ public class DefaultArchetype
      */
     public String toString()
     {
-        return  this.characterName + "is a " + this.archetypeName + ", had " + this.life + " HP, " + this.damage + " strength and " + this.initiative + " initiative.";
+        return  this.characterName + " is a " + this.archetypeName + ", had " + this.life + " HP, " + this.damage + " strength and " + this.initiative + " initiative.";
     }
 
     public String getArchetypeName()
