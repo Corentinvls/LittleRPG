@@ -1,10 +1,12 @@
 /**
  * WizardArchetype Class extends by DefaultArchetype
  * @see #magicDamage int number to do magical damage
+ * @see #maxMagicDamage int number to init max magical damage
  */
 public class WizardArchetype extends DefaultArchetype
 {
     private int magicDamage;
+    private int maxMagicDamage;
 
     /**
      * WizardArchetype constructor
@@ -18,6 +20,7 @@ public class WizardArchetype extends DefaultArchetype
     {
         super(name, damage, life, initiative);
         this.magicDamage = magicDamage;
+        this.maxMagicDamage = magicDamage;
         this.setArchetypeName("Wizard");
     }
 
@@ -28,7 +31,7 @@ public class WizardArchetype extends DefaultArchetype
     public void reset()
     {
         this.setLife(this.getMaxLife());
-        this.magicDamage = 50;
+        this.magicDamage = this.maxMagicDamage;
     }
 
     /**
