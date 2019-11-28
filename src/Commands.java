@@ -24,21 +24,22 @@ public class Commands
                 return false;
             case "play":
                 main.game = new Game();
-                printn("New game created !");
+                printn("New game created !\n");
                 return true;
             case "create":
                 if(main.game == null)
                     printn("You must to create a new game with command 'play' !");
                 else
                     main.game.create();
+                printn("");
                 return true;
             case "characters":
                 if(main.game == null)
-                    printn("You must to create a new game with command 'play' !");
+                    printn("You must to create a new game with command 'play' !\n");
                 else
                 {
                     if(main.game.characters.size() == 0)
-                        printn("No characters found ! Use 'create' to create a character.");
+                        printn("No characters found ! Use 'create' to create a character.\n");
                     else
                         main.game.listCharacters();
                 }
@@ -63,25 +64,26 @@ public class Commands
                             printn(main.game.characters.get(index - 1));
                     } while(index != -1);
                 }
+                printn("");
                 return true;
             case "fight":
                 if(main.game == null)
-                    printn("You must to create a new game with command 'play' !");
+                    printn("You must to create a new game with command 'play' !\n");
                 else
                 {
                     if(main.game.characters.size() < 2)
-                        printn("You need at least two characters !");
+                        printn("You need at least two characters !\n");
                     else
                         main.game.fight();
                 }
                 return true;
             case "remove":
                 if(main.game == null)
-                    printn("You must to create a new game with command 'play' !");
+                    printn("You must to create a new game with command 'play' !\n");
                 else
                 {
                     if(main.game.characters.size() == 0)
-                        Commands.printn("Characters list is empty !");
+                        Commands.printn("Characters list is empty !\n");
                     else
                         main.game.remove();
                 }
@@ -155,6 +157,32 @@ public class Commands
                 printn("Enter a number !");
             }
         }
+        return n;
+    }
+
+    /**
+     * Method inputInt
+     * @param message a message display before the input
+     * @param min int minimum value
+     * @param max int maximum value
+     * @return an input number between min and max
+     */
+    public static  int inputInt(String message, int min, int max)
+    {
+        int n;
+        do
+        {
+            n = inputInt(message);
+            if(n < min)
+            {
+                if(n == -1)
+                    return n;
+                else
+                    printn("Invalid number ! It can't be inferior to " + min + " !");
+            }
+            else if (n > max)
+                printn("Invalid number ! It can't be superior to " + max + " !");
+        } while(n < min || n > max);
         return n;
     }
 }

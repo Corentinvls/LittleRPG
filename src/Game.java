@@ -18,26 +18,86 @@ public class Game
         characters = new ArrayList<IArchetype>();
     }
 
-
     /**
      * Create method for creating a new character with all attributes
      */
     public void create()
     {
         Commands.printn("Creating a character...");
-        switch (createArchetype())
+        String archetype = createArchetype();
+        if (archetype == null)
+            return;
+        String name = createName();
+        if (name == null)
+            return;
+        int life = createLife();
+        if(life == -1)
+            return;
+        int damage = createDamage();
+        if(damage == -1)
+            return;
+        int initiative = createInitiative();
+        if(initiative == -1)
+            return;
+        switch (archetype)
         {
             case  "warrior" :
-                characters.add(new WarriorArchetype(createName(),createDamage(), createLife(), createInitiative()));
+                characters.add(new WarriorArchetype(name, damage, life, initiative));
                 break;
             case  "wizard" :
-                characters.add(new WizardArchetype(createName(),createDamage(), createLife(), createInitiative(), createMagicDamage()));
+                int magicalDamage = createMagicDamage();
+                if(magicalDamage == -1)
+                    return;
+                characters.add(new WizardArchetype(name, damage, life, initiative, magicalDamage));
                 break;
             case  "thief" :
-                characters.add(new ThiefArchetype(createName(),createDamage(), createLife(), createInitiative()));
+                characters.add(new ThiefArchetype(name, damage, life, initiative));
                 break;
         }
         Commands.printn("Character '" + characters.get(characters.size() - 1).getName() + "' has been created");
+    }
+
+    /**
+     * createArchetype method for generate archetype of each new character
+     * @return #archetype of the new character
+     */
+    private String createArchetype()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        String archetype;
+        List<String> archetypes = new ArrayList<String>();
+        archetypes.add("warrior");
+        archetypes.add("wizard");
+        archetypes.add("thief");
+        listArchetype(archetypes);
+        do
+        {
+            Commands.printn("");
+            Commands.printn("Enter '-1' to cancel");
+            Commands.printn("");
+            Commands.print("> Choose your class : ");
+            archetype = sc.nextLine().toLowerCase();
+            if (archetype.equals("-1"))
+                return null;
+            if (archetype.equals(""))
+            {
+                Commands.printn("Class is empty !");
+                continue;
+            }
+            if (archetypes.indexOf(archetype) == -1)
+            {
+                Commands.printn("The class '" + archetype + "' doesn't exist !");
+                continue;
+            }
+            do
+            {
+                Commands.printn("Valid the class '" + archetype + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return archetype;
     }
 
     /**
@@ -51,9 +111,13 @@ public class Game
         String name;
         do
         {
-            Commands.print("");
+            Commands.printn("");
+            Commands.printn("Enter '-1' to cancel");
+            Commands.printn("");
             Commands.print("> Enter your name : ");
             name = sc.nextLine();
+            if(name.equals("-1"))
+                return null;
             if(name.equals(""))
             {
                 Commands.printn("Name is empty !");
@@ -69,118 +133,6 @@ public class Game
             } while (!valid.equals("yes") && !valid.equals("no"));
         } while(!valid.equals("yes"));
         return name;
-    }
-
-    /**
-     * createDamage method for create new character player damage
-     * @return #damage of the new character created
-     */
-    private int createDamage()
-    {
-        Scanner sc = new Scanner(System.in);
-        String valid = "";
-        int damage = 0;
-        do
-        {
-            Commands.print("");
-            damage = Commands.inputInt("Enter character's power strike : ");
-            if(damage == 0)
-            {
-                Commands.printn("Power Strike is null !");
-                continue;
-            }
-            do
-            {
-                Commands.printn("Valid power strike '" + damage + "' ? Yes / No");
-                Commands.print("> ");
-                valid = sc.nextLine().toLowerCase();
-            } while (!valid.equals("yes") && !valid.equals("no"));
-        } while(!valid.equals("yes"));
-        return damage;
-    }
-
-    /**
-     * createMagicDamage method for create new character wizard player magic damage
-     * @return #magicDamage of the new character created
-     */
-    private int createMagicDamage()
-    {
-        Scanner sc = new Scanner(System.in);
-        String valid = "";
-        int magicDamage = 0;
-        do
-        {
-            Commands.print("");
-            magicDamage = Commands.inputInt("Enter character's magic damage : ");
-            if(magicDamage == 0)
-            {
-                Commands.printn("Magic damage is null !");
-                continue;
-            }
-            do
-            {
-                Commands.printn("Valid magic damage '" + magicDamage + "' ? Yes / No");
-                Commands.print("> ");
-                valid = sc.nextLine().toLowerCase();
-            } while (!valid.equals("yes") && !valid.equals("no"));
-        } while(!valid.equals("yes"));
-        return magicDamage;
-    }
-
-    /**
-     * createInitiative method for create new character player initiative
-     * @return #initiative of the new character created
-     */
-    private int createInitiative()
-    {
-        Scanner sc = new Scanner(System.in);
-        String valid = "";
-        int initiative = 0;
-        do
-        {
-            Commands.print("");
-            initiative = Commands.inputInt("Enter character's initiative: ");
-            if(initiative == 0)
-            {
-                Commands.printn("Initiative is null !");
-                continue;
-            }
-            do
-            {
-                Commands.printn("Valid initiative '" + initiative + "' ? Yes / No");
-                Commands.print("> ");
-                valid = sc.nextLine().toLowerCase();
-            } while (!valid.equals("yes") && !valid.equals("no"));
-        } while(!valid.equals("yes"));
-        return initiative;
-    }
-
-    /**
-     * createLife method for create new character player life
-     * @return #life of the new character created
-     */
-    private int createLife()
-    {
-        Scanner sc = new Scanner(System.in);
-        String valid = "";
-        int life = 0;
-        do
-        {
-            Commands.print("");
-            life = Commands.inputInt("Enter character's life : ");
-            if(life == 0)
-            {
-                Commands.printn("Life is null !");
-                continue;
-            }
-            do
-            {
-                Commands.printn("Valid life '" + life + "' ? Yes / No");
-                Commands.print("> ");
-                valid = sc.nextLine().toLowerCase();
-            } while (!valid.equals("yes") && !valid.equals("no"));
-        } while(!valid.equals("yes"));
-        return life;
     }
 
     /**
@@ -202,42 +154,109 @@ public class Game
     }
 
     /**
-     * createArchetype method for generate archetype of each new character
-     * @return #archetype of the new character
+     * createLife method for create new character player life
+     * @return #life of the new character created
      */
-    private String createArchetype()
+    private int createLife()
     {
         Scanner sc = new Scanner(System.in);
         String valid = "";
-        String archetype;
-        List<String> archetypes = new ArrayList<String>();
-        archetypes.add("warrior");
-        archetypes.add("wizard");
-        archetypes.add("thief");
-        listArchetype(archetypes);
+        int life;
         do
         {
             Commands.print("");
-            Commands.print("> Choose your class: ");
-            archetype = sc.nextLine().toLowerCase();
-            if(archetype == "")
-            {
-                Commands.printn("Class is empty !");
-                continue;
-            }
-            if(archetypes.indexOf(archetype) == -1)
-            {
-                Commands.printn("The class '" + archetype + "' doesn't exist !");
-                continue;
-            }
+            Commands.print("Enter '-1' to cancel");
+            Commands.print("");
+            life = Commands.inputInt("Enter character's life (1 - 1000) :", 1, 1000);
+            if(life == -1)
+                return life;
             do
             {
-                Commands.printn("Valid the class '" + archetype + "' ? Yes / No");
+                Commands.printn("Valid life '" + life + "' ? Yes / No");
                 Commands.print("> ");
                 valid = sc.nextLine().toLowerCase();
             } while (!valid.equals("yes") && !valid.equals("no"));
         } while(!valid.equals("yes"));
-        return archetype;
+        return life;
+    }
+
+    /**
+     * createDamage method for create new character player damage
+     * @return #damage of the new character created
+     */
+    private int createDamage()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int damage;
+        do
+        {
+            Commands.print("");
+            Commands.print("Enter '-1' to cancel");
+            Commands.print("");
+            damage = Commands.inputInt("Enter character's power strike (1 - 500) :", 1, 500);
+            if(damage == -1)
+                return damage;
+            do
+            {
+                Commands.printn("Valid power strike '" + damage + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return damage;
+    }
+
+    /**
+     * createMagicDamage method for create new character wizard player magic damage
+     * @return #magicDamage of the new character created
+     */
+    private int createMagicDamage()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int magicDamage;
+        do
+        {
+            Commands.print("");
+            Commands.print("Enter '-1' to cancel");
+            Commands.print("");
+            magicDamage = Commands.inputInt("Enter character's magic damage (1 - 500) :", 1, 500);
+            if(magicDamage == -1)
+                return  magicDamage;
+            do
+            {
+                Commands.printn("Valid magic damage '" + magicDamage + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return magicDamage;
+    }
+
+    /**
+     * createInitiative method for create new character player initiative
+     * @return #initiative of the new character created
+     */
+    private int createInitiative()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int initiative;
+        do
+        {
+            Commands.print("");
+            initiative = Commands.inputInt("Enter character's initiative (1 - 100) :", 1, 100);
+            if(initiative == -1)
+                return initiative;
+            do
+            {
+                Commands.printn("Valid initiative '" + initiative + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return initiative;
     }
 
     /**
@@ -324,7 +343,7 @@ public class Game
     }
 
     /**
-     * attackFight method for display all characters informations at each rounds start
+     * attackFight method for display all characters information at each rounds start
      * @param striker is the character who become an attack
      * @param target is the character who receive the attack
      */
@@ -367,7 +386,7 @@ public class Game
         do
         {
             Commands.printn("");
-            Commands.printn("Enter '-1' to cancel.");
+            Commands.printn("Enter '-1' to cancel");
             Commands.printn("");
             indexRemove = Commands.inputInt("Enter character index : ");
             if(indexRemove == -1)
