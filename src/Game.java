@@ -30,7 +30,7 @@ public class Game
                 characters.add(new WarriorArchetype(createName(),createDamage(), createLife(), createInitiative()));
                 break;
             case  "wizard" :
-                characters.add(new WizardArchetype(createName(),createDamage(), createLife(), createInitiative(),createMagicDamage()));
+                characters.add(new WizardArchetype(createName(),createDamage(), createLife(), createInitiative(), createMagicDamage()));
                 break;
             case  "thief" :
                 characters.add(new ThiefArchetype(createName(),createDamage(), createLife(), createInitiative()));
