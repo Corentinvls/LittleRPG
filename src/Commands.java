@@ -13,7 +13,7 @@ public class Commands
     public static boolean read()
     {
         Scanner sc = new Scanner(System.in);
-        printn("*** Menu ***");
+        printn("****** Menu ******");
         print("> ");
         switch (sc.nextLine())
         {
@@ -45,23 +45,21 @@ public class Commands
                 return true;
             case "info":
                 if(main.game == null)
-                {
                     Commands.printn("You must to create a new game with command 'play' !");
-                }
                 else
                 {
                     int index;
                     main.game.listCharacters();
                     do
                     {
-                        printn("Enter '0' to quit the information.");
+                        printn("Enter '-1' to quit the information.");
                         printn("");
                         index = inputInt("Enter character index :");
-                        if(index > main.game.characters.size() || index < 0)
+                        if(index > main.game.characters.size() || (index <= 0 && index != -1))
                             printn("Character not found !");
-                        else if (index != 0)
+                        if (index != -1)
                             printn(main.game.characters.get(index - 1));
-                    } while(index != 0);
+                    } while(index != -1);
                 }
                 return true;
             case "fight":
@@ -81,17 +79,13 @@ public class Commands
                 else
                 {
                     if(main.game.characters.size() == 0)
-                    {
-                        Commands.printn("Characters list is empty");
-                    }
+                        Commands.printn("Characters list is empty !");
                     else
-                    {
                         main.game.remove();
-                    }
                 }
                 return true;
             default:
-                printn("Command Error");
+                printn("Command Error !");
                 printn("");
                 help();
                 return true;

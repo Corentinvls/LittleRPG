@@ -367,12 +367,16 @@ public class Game
         do
         {
             Commands.printn("");
+            Commands.printn("Enter '-1' to cancel.");
+            Commands.printn("");
             indexRemove = Commands.inputInt("Enter character index : ");
-            if(indexRemove < 1 || indexRemove > characters.size())
+            if ((indexRemove < 1 && indexRemove != -1) || indexRemove > characters.size())
             {
                 Commands.printn("Character not found !");
                 continue;
             }
+            if (indexRemove != -1)
+                break;
             do
             {
                 Commands.printn("Valid remove '"  + characters.get(indexRemove - 1).getName() + "' ? Yes / No");
@@ -380,7 +384,8 @@ public class Game
                 valid = selectRemove.nextLine().toLowerCase();
             } while (!valid.equals("yes") && !valid.equals("no"));
         } while(!valid.equals("yes"));
-        characters.remove(indexRemove - 1);
+        if(indexRemove != -1)
+            characters.remove(indexRemove - 1);
         Commands.printn("**********************");
     }
 }
