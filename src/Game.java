@@ -16,12 +16,10 @@ public class Game
     public Game()
     {
         characters = new ArrayList<DefaultArchetype>();
-        characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
+        /*characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
         characters.add(new ThiefArchetype("toto",150, 400, 200));
-        characters.add(new WarriorArchetype("coco",150, 400, 200));
-
+        characters.add(new WarriorArchetype("coco",150, 400, 200));*/
     }
-
 
     /**
      * Create method for creating a new character with all attributes
@@ -374,13 +372,13 @@ public class Game
             Commands.printn("");
             Commands.printn("Enter '-1' to cancel.");
             indexRemove = Commands.inputInt("Enter character index : ");
-            if((indexRemove < 1 && indexRemove != -1) || indexRemove > characters.size())
+            if (indexRemove == -1)
+                break;
+            else if(indexRemove <= 0 || indexRemove > characters.size())
             {
                 Commands.printn("Character not found !");
                 continue;
             }
-            if  (indexRemove == -1)
-                break;
             do
             {
                 Commands.printn("Valid remove '"  + characters.get(indexRemove - 1).getName() + "' ? Yes / No");
