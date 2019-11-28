@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -55,9 +56,7 @@ public class Commands
                     {
                         printn("Enter '0' to quit the information.");
                         printn("");
-                        printn("Enter character index :");
-                        print("> ");
-                        index = sc.nextInt();
+                        index = inputInt("Enter character index :");
                         if(index > main.game.characters.size() || index < 0)
                             printn("Character not found !");
                         else if (index != 0)
@@ -135,5 +134,31 @@ public class Commands
     public static void print(Object o)
     {
         System.out.print(o);
+    }
+
+    /**
+     * Method inputInt
+     * @param message a message display before the input
+     * @return an input number
+     */
+    public static int inputInt(String message)
+    {
+        boolean valid = false;
+        int n = 0;
+        while(!valid)
+        {
+            try
+            {
+                printn(message);
+                print("> ");
+                n = new Scanner(System.in).nextInt();
+                valid = true;
+            } catch (InputMismatchException e)
+            {
+                printn("Error !");
+                printn("Enter a number !");
+            }
+        }
+        return n;
     }
 }

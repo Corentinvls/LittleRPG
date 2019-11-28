@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="13" project-jdk-type="JavaSDK">
+=======
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/javadoc" />
+    <option name="OPTION_SCOPE" value="private" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="13.0.1" project-jdk-type="JavaSDK">
+>>>>>>> 33cdae5d4bc62802d10167813e1aa6bbff7e78f3
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
