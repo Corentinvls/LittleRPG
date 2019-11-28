@@ -17,16 +17,16 @@ public class Game
         switch (createArchetype())
         {
             case  "warrior" :
-                characters.add(new WarriorArchetype(createName()));
+                characters.add(new WarriorArchetype(createName(),createDamage(), createLife(), createInitiative()));
                 break;
             case  "wizard" :
-                characters.add(new WizardArchetype(createName()));
+                characters.add(new WizardArchetype(createName(),createDamage(), createLife(), createInitiative(),createMagicDamage()));
                 break;
             case  "thief" :
-                characters.add(new ThiefArchetype(createName()));
+                characters.add(new ThiefArchetype(createName(),createDamage(), createLife(), createInitiative()));
                 break;
             default:
-                characters.add(new DefaultArchetype(createName()));
+                characters.add(new DefaultArchetype(createName(), createDamage(), createLife(), createInitiative()));
         }
         Commands.printn("Character '" + characters.get(characters.size() - 1).getName() + "' has been created");
     }
@@ -58,6 +58,109 @@ public class Game
         return name;
     }
 
+    private int createDamage()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int damage = 0;
+        do
+        {
+            Commands.print("");
+            Commands.print("> Enter character's power strike : ");
+            damage = sc.nextInt();
+            sc.nextLine();
+            if(damage == 0)
+            {
+                Commands.printn("Power Strike is null !");
+                continue;
+            }
+            do
+            {
+                Commands.printn("Valid power strike '" + damage + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return damage;
+    }
+
+    private int createMagicDamage()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int magicDamage = 0;
+        do
+        {
+            Commands.print("");
+            Commands.print("> Enter character's magic damage : ");
+            magicDamage = sc.nextInt();
+            sc.nextLine();
+            if(magicDamage == 0)
+            {
+                Commands.printn("Magic damage is null !");
+                continue;
+            }
+            do
+            {
+                Commands.printn("Valid magic damage '" + magicDamage + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return magicDamage;
+    }
+
+    private int createInitiative()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int initiative = 0;
+        do
+        {
+            Commands.print("");
+            Commands.print("> Enter character's initiative: ");
+            initiative = sc.nextInt();
+            sc.nextLine();
+            if(initiative == 0)
+            {
+                Commands.printn("Initiative is null !");
+                continue;
+            }
+            do
+            {
+                Commands.printn("Valid initiative '" + initiative + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return initiative;
+    }
+
+    private int createLife()
+    {
+        Scanner sc = new Scanner(System.in);
+        String valid = "";
+        int life = 0;
+        do
+        {
+            Commands.print("");
+            Commands.print("> Enter character's life : ");
+            life = sc.nextInt();
+            sc.nextLine();
+            if(life == 0)
+            {
+                Commands.printn("Life is null !");
+                continue;
+            }
+            do
+            {
+                Commands.printn("Valid life '" + life + "' ? Yes / No");
+                Commands.print("> ");
+                valid = sc.nextLine().toLowerCase();
+            } while (!valid.equals("yes") && !valid.equals("no"));
+        } while(!valid.equals("yes"));
+        return life;
+    }
     private boolean usedName(String name)
     {
         for(DefaultArchetype character : characters)
@@ -187,7 +290,7 @@ public class Game
 
         Commands.printn("Name         : " + striker.getName());
         Commands.printn("Archetype    : " + striker.getArchetypeName());
-        Commands.printn("Health point : " + striker.getLife());
+        Commands.printn("Health point : " + striker.getLife() + " / " + striker.getMaxLife());
         Commands.printn("Power Attack : " + striker.getDamage());
         int damageSend = striker.attack();
         Commands.printn("Damage       : " + damageSend);

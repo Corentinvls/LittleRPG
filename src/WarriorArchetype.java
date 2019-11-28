@@ -3,9 +3,9 @@ import java.util.Random;
 public class WarriorArchetype extends DefaultArchetype
 {
     private float shield;
-    public WarriorArchetype (String name)
+    public WarriorArchetype (String name, int damage, int life, int initiative)
     {
-        super(name) ;
+        super(name, damage, life, initiative) ;
         this.shield = 0.2f;
         this.setArchetypeName("Warrior");
     }
@@ -30,6 +30,6 @@ public class WarriorArchetype extends DefaultArchetype
     @Override
     public void reset()
     {
-        this.setLife(100);
+        this.setLife(this.getMaxLife());
     }
 }
