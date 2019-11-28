@@ -55,9 +55,11 @@ public class Commands
                         printn("Enter '-1' to quit the information.");
                         printn("");
                         index = inputInt("Enter character index :");
-                        if(index > main.game.characters.size() || (index <= 0 && index != -1))
+                        if(index == -1)
+                            break;
+                        else if(index > main.game.characters.size() || index <= 0)
                             printn("Character not found !");
-                        if (index != -1)
+                        else
                             printn(main.game.characters.get(index - 1));
                     } while(index != -1);
                 }
