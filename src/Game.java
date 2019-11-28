@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Game
 {
-    List<DefaultArchetype> characters;
+    List<IArchetype> characters;
 
     /**
      * Game method that contain the ArrayList of each characters created in the game
@@ -15,11 +15,7 @@ public class Game
      */
     public Game()
     {
-        characters = new ArrayList<DefaultArchetype>();
-        characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
-        characters.add(new ThiefArchetype("toto",150, 400, 200));
-        characters.add(new WarriorArchetype("coco",150, 400, 200));
-
+        characters = new ArrayList<IArchetype>();
     }
 
 
@@ -40,8 +36,6 @@ public class Game
             case  "thief" :
                 characters.add(new ThiefArchetype(createName(),createDamage(), createLife(), createInitiative()));
                 break;
-            default:
-                characters.add(new DefaultArchetype(createName(), createDamage(), createLife(), createInitiative()));
         }
         Commands.printn("Character '" + characters.get(characters.size() - 1).getName() + "' has been created");
     }
@@ -196,7 +190,7 @@ public class Game
      */
     private boolean usedName(String name)
     {
-        for(DefaultArchetype character : characters)
+        for(IArchetype character : characters)
         {
             if(character.getName().equals(name))
             {
@@ -287,11 +281,11 @@ public class Game
      */
     public void fight()
     {
-        DefaultArchetype playerTwo = null;
+        IArchetype playerTwo = null;
 
         Commands.printn("You're going to initiate a fight between two fighters.");
         listCharacters();
-        DefaultArchetype playerOne = characters.get(Commands.inputInt("Choose your first fighter id : ")-1);
+        IArchetype playerOne = characters.get(Commands.inputInt("Choose your first fighter id : ")-1);
 
         do
         {
@@ -334,7 +328,7 @@ public class Game
      * @param striker is the character who become an attack
      * @param target is the character who receive the attack
      */
-    private void attackFight(DefaultArchetype striker, DefaultArchetype target)
+    private void attackFight(IArchetype striker, IArchetype target)
     {
 
         Commands.printn("Name         : " + striker.getName());
@@ -356,7 +350,7 @@ public class Game
      * @param player is the player checked
      * @return true if life is superior 0 , false if life is inferior 0
      */
-    public boolean isAlive(DefaultArchetype player)
+    public boolean isAlive(IArchetype player)
     {
         return player.getLife() > 0;
     }
