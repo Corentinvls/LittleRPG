@@ -16,12 +16,10 @@ public class Game
     public Game()
     {
         characters = new ArrayList<DefaultArchetype>();
-        // characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
-        // characters.add(new ThiefArchetype("toto",150, 400, 200));
-        // characters.add(new WarriorArchetype("coco",150, 400, 200));
-
+        /*characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
+        characters.add(new ThiefArchetype("toto",150, 400, 200));
+        characters.add(new WarriorArchetype("coco",150, 400, 200));*/
     }
-
 
     /**
      * Create method for creating a new character with all attributes
@@ -85,7 +83,7 @@ public class Game
     {
         Scanner sc = new Scanner(System.in);
         String valid = "";
-        int damage = 0;
+        int damage;
         do
         {
             Commands.print("");
@@ -302,7 +300,7 @@ public class Game
 
         if(playerTwo.getInitiative() > playerOne.getInitiative())
         {
-           var tempToChange=playerOne;
+           var tempToChange = playerOne;
            playerOne = playerTwo;
            playerTwo = tempToChange;
         }
@@ -336,7 +334,6 @@ public class Game
      */
     private void attackFight(DefaultArchetype striker, DefaultArchetype target)
     {
-
         Commands.printn("Name         : " + striker.getName());
         Commands.printn("Archetype    : " + striker.getArchetypeName());
         Commands.printn("Health point : " + striker.getLife() + " / " + striker.getMaxLife());
@@ -373,8 +370,11 @@ public class Game
         do
         {
             Commands.printn("");
+            Commands.printn("Enter '-1' to cancel.");
             indexRemove = Commands.inputInt("Enter character index : ");
-            if(indexRemove < 1 || indexRemove > characters.size())
+            if (indexRemove == -1)
+                break;
+            else if(indexRemove <= 0 || indexRemove > characters.size())
             {
                 Commands.printn("Character not found !");
                 continue;
@@ -386,7 +386,8 @@ public class Game
                 valid = selectRemove.nextLine().toLowerCase();
             } while (!valid.equals("yes") && !valid.equals("no"));
         } while(!valid.equals("yes"));
-        characters.remove(indexRemove - 1);
+        if (indexRemove != -1)
+            characters.remove(indexRemove - 1);
         Commands.printn("**********************");
     }
 }
