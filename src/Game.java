@@ -16,7 +16,12 @@ public class Game
     public Game()
     {
         characters = new ArrayList<DefaultArchetype>();
+        characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
+        characters.add(new ThiefArchetype("toto",150, 400, 200));
+        characters.add(new WarriorArchetype("coco",150, 400, 200));
+
     }
+
 
     /**
      * Create method for creating a new character with all attributes
@@ -84,9 +89,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's power strike : ");
-            damage = sc.nextInt();
-            sc.nextLine();
+            damage = Commands.inputInt("Enter character's power strike : ");
             if(damage == 0)
             {
                 Commands.printn("Power Strike is null !");
@@ -114,9 +117,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's magic damage : ");
-            magicDamage = sc.nextInt();
-            sc.nextLine();
+            magicDamage = Commands.inputInt("Enter character's magic damage : ");
             if(magicDamage == 0)
             {
                 Commands.printn("Magic damage is null !");
@@ -144,9 +145,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's initiative: ");
-            initiative = sc.nextInt();
-            sc.nextLine();
+            initiative = Commands.inputInt("Enter character's initiative: ");
             if(initiative == 0)
             {
                 Commands.printn("Initiative is null !");
@@ -174,9 +173,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's life : ");
-            life = sc.nextInt();
-            sc.nextLine();
+            life = Commands.inputInt("Enter character's life : ");
             if(life == 0)
             {
                 Commands.printn("Life is null !");
@@ -283,6 +280,7 @@ public class Game
         Commands.printn("**********************");
     }
 
+
     /**
      * fight method to start a fight between two players
      * Select two characters in the characters list who have to fight
@@ -293,18 +291,13 @@ public class Game
 
         Commands.printn("You're going to initiate a fight between two fighters.");
         listCharacters();
-        Commands.printn("Choose your first fighter id.");
-        Commands.print("> ");
-        Scanner choiceFighter = new Scanner(System.in);
-        DefaultArchetype playerOne = characters.get(choiceFighter.nextInt()-1);
+        DefaultArchetype playerOne = characters.get(Commands.inputInt("Choose your first fighter id : ")-1);
 
         do
         {
             if(playerTwo != null && playerOne.getName().equals(playerTwo.getName()))
                 Commands.printn("Character already selected.");
-            Commands.printn("Choose your second fighter id.");
-            Commands.print("> ");
-            playerTwo = characters.get(choiceFighter.nextInt() - 1);
+            playerTwo = characters.get(Commands.inputInt("Choose your second fighter id : ") - 1);
         } while (playerOne.getName().equals(playerTwo.getName()));
 
         if(playerTwo.getInitiative() > playerOne.getInitiative())
@@ -361,7 +354,7 @@ public class Game
     /**
      * isAlive method use for check if character is alive or not checking is life
      * @param player is the player checked
-     * @return true if life > 0 , false if life < 0
+     * @return true if life is superior 0 , false if life is inferior 0
      */
     public boolean isAlive(DefaultArchetype player)
     {
@@ -380,9 +373,7 @@ public class Game
         do
         {
             Commands.printn("");
-            Commands.print("> Enter character index : ");
-            indexRemove = selectRemove.nextInt();
-            selectRemove.nextLine();
+            indexRemove = Commands.inputInt("Enter character index : ");
             if(indexRemove < 1 || indexRemove > characters.size())
             {
                 Commands.printn("Character not found !");
