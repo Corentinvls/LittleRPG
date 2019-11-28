@@ -1,9 +1,19 @@
-import java.util.Random;
-
+/**
+ * WizardArchetype Class extends by DefaultArchetype
+ * @see #magicDamage int number to do magical damage
+ */
 public class WizardArchetype extends DefaultArchetype
 {
-
     private int magicDamage;
+
+    /**
+     * WizardArchetype constructor
+     * @param name string to set the character name
+     * @param damage int to set the character damage
+     * @param life int to set the character life
+     * @param initiative int to set the character initiative
+     * @param magicDamage int to set the character magic damage
+     */
     public WizardArchetype (String name,int damage, int life, int initiative,int magicDamage)
     {
         super(name, damage, life, initiative);
@@ -11,6 +21,20 @@ public class WizardArchetype extends DefaultArchetype
         this.setArchetypeName("Wizard");
     }
 
+    /**
+     * Override method reset from DefaultArchetype to reset the archetype properties
+     */
+    @Override
+    public void reset()
+    {
+        this.setLife(this.getMaxLife());
+        this.magicDamage = 50;
+    }
+
+    /**
+     * Override method attack from DefaultArchetype
+     * @return int of archetype's attack
+     */
     @Override
     public int attack()
     {
@@ -25,12 +49,5 @@ public class WizardArchetype extends DefaultArchetype
             this.magicDamage /= 2;
         }
         return  damageSend;
-    }
-
-    @Override
-    public void reset()
-    {
-        this.setLife(this.getMaxLife());
-        this.magicDamage = 50;
     }
 }

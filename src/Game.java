@@ -2,15 +2,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class Game to start the game that contain all create / list / editing methods
+ */
 public class Game
 {
     List<DefaultArchetype> characters;
 
+    /**
+     * Game method that contain the ArrayList of each characters created in the game
+     * @see #characters ArrayList of DefaultArchetype
+     */
     public Game()
     {
         characters = new ArrayList<DefaultArchetype>();
+        characters.add(new WizardArchetype("BIBI",150, 400, 200, 200));
+        characters.add(new ThiefArchetype("toto",150, 400, 200));
+        characters.add(new WarriorArchetype("coco",150, 400, 200));
+
     }
 
+
+    /**
+     * Create method for creating a new character with all attributes
+     */
     public void create()
     {
         Commands.printn("Creating a character...");
@@ -20,7 +35,7 @@ public class Game
                 characters.add(new WarriorArchetype(createName(),createDamage(), createLife(), createInitiative()));
                 break;
             case  "wizard" :
-                characters.add(new WizardArchetype(createName(),createDamage(), createLife(), createInitiative(),createMagicDamage()));
+                characters.add(new WizardArchetype(createName(),createDamage(), createLife(), createInitiative(), createMagicDamage()));
                 break;
             case  "thief" :
                 characters.add(new ThiefArchetype(createName(),createDamage(), createLife(), createInitiative()));
@@ -31,6 +46,10 @@ public class Game
         Commands.printn("Character '" + characters.get(characters.size() - 1).getName() + "' has been created");
     }
 
+    /**
+     * createName method for create new character player name
+     * @return #name of the new character created
+     */
     private String createName()
     {
         Scanner sc = new Scanner(System.in);
@@ -58,6 +77,10 @@ public class Game
         return name;
     }
 
+    /**
+     * createDamage method for create new character player damage
+     * @return #damage of the new character created
+     */
     private int createDamage()
     {
         Scanner sc = new Scanner(System.in);
@@ -66,9 +89,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's power strike : ");
-            damage = sc.nextInt();
-            sc.nextLine();
+            damage = Commands.inputInt("Enter character's power strike : ");
             if(damage == 0)
             {
                 Commands.printn("Power Strike is null !");
@@ -84,6 +105,10 @@ public class Game
         return damage;
     }
 
+    /**
+     * createMagicDamage method for create new character wizard player magic damage
+     * @return #magicDamage of the new character created
+     */
     private int createMagicDamage()
     {
         Scanner sc = new Scanner(System.in);
@@ -92,9 +117,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's magic damage : ");
-            magicDamage = sc.nextInt();
-            sc.nextLine();
+            magicDamage = Commands.inputInt("Enter character's magic damage : ");
             if(magicDamage == 0)
             {
                 Commands.printn("Magic damage is null !");
@@ -110,6 +133,10 @@ public class Game
         return magicDamage;
     }
 
+    /**
+     * createInitiative method for create new character player initiative
+     * @return #initiative of the new character created
+     */
     private int createInitiative()
     {
         Scanner sc = new Scanner(System.in);
@@ -118,9 +145,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's initiative: ");
-            initiative = sc.nextInt();
-            sc.nextLine();
+            initiative = Commands.inputInt("Enter character's initiative: ");
             if(initiative == 0)
             {
                 Commands.printn("Initiative is null !");
@@ -136,6 +161,10 @@ public class Game
         return initiative;
     }
 
+    /**
+     * createLife method for create new character player life
+     * @return #life of the new character created
+     */
     private int createLife()
     {
         Scanner sc = new Scanner(System.in);
@@ -144,9 +173,7 @@ public class Game
         do
         {
             Commands.print("");
-            Commands.print("> Enter character's life : ");
-            life = sc.nextInt();
-            sc.nextLine();
+            life = Commands.inputInt("Enter character's life : ");
             if(life == 0)
             {
                 Commands.printn("Life is null !");
@@ -161,6 +188,12 @@ public class Game
         } while(!valid.equals("yes"));
         return life;
     }
+
+    /**
+     * usedName method for check if a name is already use or not
+     * @param name : the name of the character
+     * @return boolean true if name already in use and false if name available
+     */
     private boolean usedName(String name)
     {
         for(DefaultArchetype character : characters)
@@ -174,6 +207,10 @@ public class Game
         return false;
     }
 
+    /**
+     * createArchetype method for generate archetype of each new character
+     * @return #archetype of the new character
+     */
     private String createArchetype()
     {
         Scanner sc = new Scanner(System.in);
@@ -209,6 +246,10 @@ public class Game
         return archetype;
     }
 
+    /**
+     * listArchetype method to list all of the archetypes available for character creation.
+     * @param archetypes available in the list
+     */
     public void listArchetype(List<String> archetypes)
     {
         Commands.printn("List of archetype :");
@@ -222,6 +263,9 @@ public class Game
         Commands.printn("**********************");
     }
 
+    /**
+     * listCharacters method to display all characters already created
+     */
     public void listCharacters()
     {
         Commands.printn("List of characters :");
@@ -236,24 +280,24 @@ public class Game
         Commands.printn("**********************");
     }
 
+
+    /**
+     * fight method to start a fight between two players
+     * Select two characters in the characters list who have to fight
+     */
     public void fight()
     {
         DefaultArchetype playerTwo = null;
 
         Commands.printn("You're going to initiate a fight between two fighters.");
         listCharacters();
-        Commands.printn("Choose your first fighter id.");
-        Commands.print("> ");
-        Scanner choiceFighter = new Scanner(System.in);
-        DefaultArchetype playerOne = characters.get(choiceFighter.nextInt()-1);
+        DefaultArchetype playerOne = characters.get(Commands.inputInt("Choose your first fighter id : ")-1);
 
         do
         {
             if(playerTwo != null && playerOne.getName().equals(playerTwo.getName()))
                 Commands.printn("Character already selected.");
-            Commands.printn("Choose your second fighter id.");
-            Commands.print("> ");
-            playerTwo = characters.get(choiceFighter.nextInt() - 1);
+            playerTwo = characters.get(Commands.inputInt("Choose your second fighter id : ") - 1);
         } while (playerOne.getName().equals(playerTwo.getName()));
 
         if(playerTwo.getInitiative() > playerOne.getInitiative())
@@ -285,6 +329,11 @@ public class Game
         playerTwo.reset();
     }
 
+    /**
+     * attackFight method for display all characters informations at each rounds start
+     * @param striker is the character who become an attack
+     * @param target is the character who receive the attack
+     */
     private void attackFight(DefaultArchetype striker, DefaultArchetype target)
     {
 
@@ -303,13 +352,18 @@ public class Game
     }
 
     /**
-     * @return life > 0
-     * */
+     * isAlive method use for check if character is alive or not checking is life
+     * @param player is the player checked
+     * @return true if life is superior 0 , false if life is inferior 0
+     */
     public boolean isAlive(DefaultArchetype player)
     {
         return player.getLife() > 0;
     }
 
+    /**
+     * remove method to remove a character from the character list with his index number
+     */
     public void remove()
     {
         String valid = "null";
@@ -319,9 +373,7 @@ public class Game
         do
         {
             Commands.printn("");
-            Commands.print("> Enter character index : ");
-            indexRemove = selectRemove.nextInt();
-            selectRemove.nextLine();
+            indexRemove = Commands.inputInt("Enter character index : ");
             if(indexRemove < 1 || indexRemove > characters.size())
             {
                 Commands.printn("Character not found !");
